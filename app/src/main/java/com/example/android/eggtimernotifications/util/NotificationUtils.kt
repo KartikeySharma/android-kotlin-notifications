@@ -39,8 +39,14 @@ private val FLAGS = 0
 fun NotificationManager.sendNotification(messageBody: String, applicationContext: Context) {
 
     val contentIntent = Intent(applicationContext, MainActivity::class.java)
-    // TODO: Step 1.12 create PendingIntent
 
+    val pending= PendingIntent.getActivity(
+        applicationContext,
+        NOTIFICATION_ID,
+        contentIntent,
+        // Specifies option to use another one or use the current one
+        PendingIntent.FLAG_UPDATE_CURRENT
+    )
     // TODO: Step 2.0 add style
 
     // TODO: Step 2.2 add snooze action
@@ -60,7 +66,9 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
 
 
     // TODO: Step 1.13 set content intent
-
+        .setContentIntent(pending)
+        // when user taps on notification, it will dismiss itself as it redirects to app
+        .setAutoCancel(true)
 
     // TODO: Step 2.1 add style to builder
 

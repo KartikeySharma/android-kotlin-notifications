@@ -126,7 +126,7 @@ class EggTimerViewModel(private val app: Application) : AndroidViewModel(app) {
                 ) as NotificationManager
                 notificationmanager.sendNotification(app.getString(R.string.timer_running), app)
 
-                // TODO: Step 1.15 call cancel notification
+                // Cancel previous notifications so that there are no overlaps in notifications
                 val notificationManager =
                     ContextCompat.getSystemService(
                         app,
