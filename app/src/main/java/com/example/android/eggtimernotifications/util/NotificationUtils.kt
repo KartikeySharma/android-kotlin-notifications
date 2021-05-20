@@ -60,8 +60,14 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         // Large icon goes away when it is expanded
         .bigLargeIcon(null)
 
-
     // TODO: Step 2.2 add snooze action
+    val snoozeIntent= Intent(applicationContext, SnoozeReceiver::class.java)
+    val snoozePendingintent = PendingIntent.getBroadcast(
+        applicationContext,
+        NOTIFICATION_ID,
+        snoozeIntent,
+        FLAGS
+    )
 
     // TODO: Step 1.2 get an instance of NotificationCompat.Builder
     val builder= NotificationCompat.Builder(
@@ -80,8 +86,12 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         .setAutoCancel(true)
         .setStyle(newstyle)
         .setLargeIcon(eggimage)
-
-    // TODO: Step 2.3 add snooze action
+        .addAction(
+            R.drawable.egg_icon,
+            applicationContext.getString(R.string.snooze),
+            snoozePendingintent
+        )
+        .setPriority(NotificationCompat.PRIORITY_HIGH)
 
     // TODO: Step 2.5 set priority
 

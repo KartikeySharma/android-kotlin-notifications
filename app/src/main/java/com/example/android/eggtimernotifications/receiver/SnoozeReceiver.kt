@@ -40,6 +40,7 @@ class SnoozeReceiver: BroadcastReceiver() {
             notifyIntent,
             PendingIntent.FLAG_UPDATE_CURRENT
         )
+
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         AlarmManagerCompat.setExactAndAllowWhileIdle(
             alarmManager,
