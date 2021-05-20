@@ -16,6 +16,7 @@
 
 package com.example.android.eggtimernotifications.util
 
+import android.app.Notification
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
@@ -48,6 +49,17 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         PendingIntent.FLAG_UPDATE_CURRENT
     )
     // TODO: Step 2.0 add style
+    // Load image
+    val eggimage= BitmapFactory.decodeResource(
+        applicationContext.resources ,
+        R.drawable.cooked_egg
+    )
+    // BigPicture
+    val newstyle= NotificationCompat.BigPictureStyle()
+        .bigPicture(eggimage)
+        // Large icon goes away when it is expanded
+        .bigLargeIcon(null)
+
 
     // TODO: Step 2.2 add snooze action
 
@@ -59,25 +71,20 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
 
     // TODO: Step 1.8 use the new 'breakfast' notification channel
 
-    // TODO: Step 1.3 set title, text and icon to builder
         .setSmallIcon(R.drawable.egg_icon)
         .setContentTitle(applicationContext.getString(R.string.notification_title))
         .setContentText(messageBody)
 
-
-    // TODO: Step 1.13 set content intent
         .setContentIntent(pending)
         // when user taps on notification, it will dismiss itself as it redirects to app
         .setAutoCancel(true)
-
-    // TODO: Step 2.1 add style to builder
-
+        .setStyle(newstyle)
+        .setLargeIcon(eggimage)
 
     // TODO: Step 2.3 add snooze action
 
     // TODO: Step 2.5 set priority
 
-    // TODO: Step 1.4 call notify
     notify(NOTIFICATION_ID,builder.build())
 }
 
